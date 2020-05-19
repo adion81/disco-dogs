@@ -26,13 +26,22 @@ const NewDog = (props) => {
 
   return (
     <form onSubmit={ addDawg }>
-      <p>Name: <input type="text" onChange={ e => setName(e.target.value) } /></p>
-      { errors.name ? <p>{errors.name.message}</p> : "" }
-      <p>Breed: <input type="text" onChange={ e => setBreed(e.target.value) } /></p>
-      { errors.breed ? <p>{errors.breed.message}</p> : "" }
-      <p>Age: <input type="number" onChange={ e => setAge(e.target.value) } value={ age } /></p>
-      { errors.age ? <p>{errors.age.message}</p> : "" }
-      <input type="submit" />
+      <div className="form-group">
+        <label>Name: </label>
+        <input type="text" className="form-control" onChange={ e => setName(e.target.value) } />
+        { errors.name ? <p className="text-danger">{errors.name.message}</p> : "" }
+      </div>
+      <div className="form-group">
+        <label>Breed: </label>
+        <input type="text" className="form-control" onChange={ e => setBreed(e.target.value) } />
+        { errors.breed ? <p className="text-danger">{errors.breed.message}</p> : "" }
+      </div>
+      <div className="form-group">
+        <label>Age: </label>
+        <input type="number" className="form-control" onChange={ e => setAge(e.target.value) } value={ age } />
+        { errors.age ? <p className="text-danger">{errors.age.message}</p> : "" }
+      </div>
+      <input className="btn btn-outline-primary" type="submit" />
     </form>
   )
 
