@@ -24,7 +24,6 @@ function App() {
         if(res.data.errors) {
           setErrors(res.data.errors);
         } else {
-          // TODO: somethings
           setChanges(!changes);
           setEdit(0);
         }
@@ -36,7 +35,6 @@ function App() {
     e.preventDefault();
     axios.delete(`http://localhost:8000/api/dogs/${edit}`)
       .then(res => {
-        // TODO: something
         setChanges(!changes);
         setEdit(0);
       })
@@ -56,7 +54,7 @@ function App() {
 
   return (
     <div className="container">
-      <div className="jumbotron">
+      <div className="jumbotron bg-dark text-white">
         <h1>Disco Dawgs</h1>
       </div>
 
@@ -76,18 +74,28 @@ function App() {
       </Router>
 
       <div className={ edit ? "my-modal is-active" : "my-modal"}>
-        <form onSubmit={ updateDawg }>
+        <form className="my-modal-body" onSubmit={ updateDawg }>
           <div className="card">
             <div className="card-header bg-dark text-white">
               Edit Dog
+              <a className="close" onClick={e => setEdit(0)} >&times;</a>
             </div>
             <div className="card-body">
-                <p>Name: <input type="text" onChange={ e => setName(e.target.value) } value={ name } /></p>
-                { errors.name ? <p>{errors.name.message}</p> : "" }
-                <p>Breed: <input type="text" onChange={ e => setBreed(e.target.value) } value={ breed } /></p>
-                { errors.breed ? <p>{errors.breed.message}</p> : "" }
-                <p>Age: <input type="number" onChange={ e => setAge(e.target.value) } value={ age } /></p>
-                { errors.age ? <p>{errors.age.message}</p> : "" }
+              <div className="form-group">
+                <label>Name: </label>
+                <input type="text" className="form-control" onChange={ e => setName(e.target.value) } value={ name } />
+                { errors.name ? <p className="text-danger">{errors.name.message}</p> : "" }
+              </div>
+              <div className="form-group">
+                <label>Breed: </label>
+                <input type="text" className="form-control" onChange={ e => setBreed(e.target.value) } value={ breed } />
+                { errors.breed ? <p className="text-danger">{errors.breed.message}</p> : "" }
+              </div>
+              <div className="form-group">
+                <label>Age: </label>
+                <input type="number" className="form-control" onChange={ e => setAge(e.target.value) } value={ age } />
+                { errors.age ? <p className="text-danger">{errors.age.message}</p> : "" }
+              </div>
             </div>
             <div className="card-footer">
               <button type="submit" className="btn btn-outline-primary">Update</button>
